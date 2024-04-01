@@ -14,6 +14,13 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
+    "objectID": "posts/introduction/index.html",
+    "href": "posts/introduction/index.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Hello. My name is Jackson Young and I am a student at the University of Nebraska-Lincoln majoring in Sports Media and Communication at the College of Journalism and Mass Communications."
+  },
+  {
     "objectID": "posts/post-with-code/index.html",
     "href": "posts/post-with-code/index.html",
     "title": "Post With Code",
@@ -23,15 +30,15 @@
   {
     "objectID": "posts/index.html",
     "href": "posts/index.html",
-    "title": "Jackson Young's Blog",
+    "title": "Jackson Young's Sports Blog",
     "section": "",
-    "text": "---\ntitle: \"CHANGE THIS TO BE THE TITLE OF YOUR POST\"\nauthor: \"THIS IS YOUR NAME\"\ndate: '2022-XX-XX'\ncategories: [lowercaseword, lowercaseword, lowercaseword]\nimage: \"image.png\"\nformat: \n  html:\n    code-fold: true\n---"
+    "text": "---\ntitle: \"Latest posts\"\"\nauthor: \"Jackson Young\"\ndate: '2024-04-01'\ncategories: [lowercaseword, lowercaseword, lowercaseword]\nimage: \"image.png\"\nformat: \n  html:\n    code-fold: true\n---"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "```\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 30, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 27, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "```\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nApr 1, 2024\n\n\nJackson Young\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 30, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 27, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   }
 ]
