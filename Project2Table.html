@@ -171,92 +171,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X2021collegebaseballpitching <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2021collegebaseballpitching.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>recruiting <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/SPMC 350/Blog/recruiting.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 284 Columns: 33
+<pre><code>Rows: 14 Columns: 61
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (2): Team, Conference
-dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
+chr  (1): Team
+dbl (60): 2014 5 stars, 2014 4 stars, 2014 3 stars, 2014 Avg Rating, 2014 Ra...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>teamlist <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Texas"</span>, <span class="st">"South Carolina"</span>, <span class="st">"Oregon"</span>, <span class="st">"Arkansas"</span>, <span class="st">"TCU"</span>, <span class="st">"Florida"</span>, <span class="st">"East Carolina"</span>, <span class="st">"Tennessee"</span>, <span class="st">"Texas Tech"</span>, <span class="st">"Vanderbilt"</span>, <span class="st">"Ole Miss"</span>, <span class="st">"Louisiana Tech"</span>, <span class="st">"Notre Dame"</span>, <span class="st">"Stanford"</span>, <span class="st">"Mississippi State"</span>, <span class="st">"Arizona"</span>, <span class="st">"Nebraska"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top16pitch <span class="ot">&lt;-</span> X2021collegebaseballpitching <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">%in%</span> teamlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>top16pitch <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Team, Conference, ERA, H, BBHBP) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ERA) <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ERA=</span><span class="st">"Earned Runs Allowed"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">H=</span><span class="st">"Hits Allowed"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">BBHBP=</span><span class="st">"Walks + HBP"</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Nebraska pitching was consistent all season where it mattered most"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The Husker's gave up less hits and free passes than all of the regional hosts, and had a low ERA."</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"Source: Sports Reference |  By: Jackson Young"</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"top"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size=</span><span class="fl">13.5</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>     ) </span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">|&gt;</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> <span class="fu">c</span>(Team <span class="sc">==</span> <span class="st">"Nebraska"</span>)) </span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"red"</span>),</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">"Nebraska"</span>)</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>recruiting <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Team, Tot5stars, Tot4stars, Tot3stars, TotAvgRating, TotAvgRanking) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(TotAvgRanking) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tot5stars=</span><span class="st">"5 stars"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tot4stars=</span><span class="st">"4 stars"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tot3stars=</span><span class="st">"3 stars"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotAvgRating=</span><span class="st">"Avg Rating"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotAvgRanking=</span><span class="st">"Avg Ranking"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Since 2014, Ohio State has recruited at the top-5 level every year"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Penn State is more comparable to Michigan with an equal number of five and four stars, and average recruiting per recruit"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="st">"By: Jackson Young"</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"Source: [247Sports](https://247sports.com/Season/2024-Football/CompositeTeamRankings/)"</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"top"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size=</span><span class="fl">13.5</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>     ) </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">|&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> <span class="fu">c</span>(Team <span class="sc">==</span> <span class="st">"Ohio State, Michigan"</span>)) </span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#BB0000"</span>),</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">"Ohio State"</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#00274C"</span>),</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">"Michigan"</span>)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="zghwqyanov" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zghwqyanov table {
+<div id="wdgduslfha" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wdgduslfha table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zghwqyanov thead, #zghwqyanov tbody, #zghwqyanov tfoot, #zghwqyanov tr, #zghwqyanov td, #zghwqyanov th {
+#wdgduslfha thead, #wdgduslfha tbody, #wdgduslfha tfoot, #wdgduslfha tr, #wdgduslfha td, #wdgduslfha th {
   border-style: none;
 }
 
-#zghwqyanov p {
+#wdgduslfha p {
   margin: 0;
   padding: 0;
 }
 
-#zghwqyanov .gt_table {
+#wdgduslfha .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -282,12 +288,12 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-left-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_caption {
+#wdgduslfha .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zghwqyanov .gt_title {
+#wdgduslfha .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -299,7 +305,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-bottom-width: 0;
 }
 
-#zghwqyanov .gt_subtitle {
+#wdgduslfha .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -311,7 +317,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-top-width: 0;
 }
 
-#zghwqyanov .gt_heading {
+#wdgduslfha .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -323,13 +329,13 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-right-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_bottom_border {
+#wdgduslfha .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_col_headings {
+#wdgduslfha .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -344,7 +350,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-right-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_col_heading {
+#wdgduslfha .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -364,7 +370,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   overflow-x: hidden;
 }
 
-#zghwqyanov .gt_column_spanner_outer {
+#wdgduslfha .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -376,15 +382,15 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 4px;
 }
 
-#zghwqyanov .gt_column_spanner_outer:first-child {
+#wdgduslfha .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zghwqyanov .gt_column_spanner_outer:last-child {
+#wdgduslfha .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zghwqyanov .gt_column_spanner {
+#wdgduslfha .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -396,11 +402,11 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   width: 100%;
 }
 
-#zghwqyanov .gt_spanner_row {
+#wdgduslfha .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zghwqyanov .gt_group_heading {
+#wdgduslfha .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -426,7 +432,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   text-align: left;
 }
 
-#zghwqyanov .gt_empty_group_heading {
+#wdgduslfha .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -441,15 +447,15 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   vertical-align: middle;
 }
 
-#zghwqyanov .gt_from_md > :first-child {
+#wdgduslfha .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zghwqyanov .gt_from_md > :last-child {
+#wdgduslfha .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zghwqyanov .gt_row {
+#wdgduslfha .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -468,7 +474,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   overflow-x: hidden;
 }
 
-#zghwqyanov .gt_stub {
+#wdgduslfha .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -481,7 +487,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 5px;
 }
 
-#zghwqyanov .gt_stub_row_group {
+#wdgduslfha .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -495,15 +501,15 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   vertical-align: top;
 }
 
-#zghwqyanov .gt_row_group_first td {
+#wdgduslfha .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zghwqyanov .gt_row_group_first th {
+#wdgduslfha .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zghwqyanov .gt_summary_row {
+#wdgduslfha .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -513,16 +519,16 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 5px;
 }
 
-#zghwqyanov .gt_first_summary_row {
+#wdgduslfha .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_first_summary_row.thick {
+#wdgduslfha .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zghwqyanov .gt_last_summary_row {
+#wdgduslfha .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -532,7 +538,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-bottom-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_grand_summary_row {
+#wdgduslfha .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -542,7 +548,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 5px;
 }
 
-#zghwqyanov .gt_first_grand_summary_row {
+#wdgduslfha .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -552,7 +558,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-top-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_last_grand_summary_row_top {
+#wdgduslfha .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -562,11 +568,11 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-bottom-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_striped {
+#wdgduslfha .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zghwqyanov .gt_table_body {
+#wdgduslfha .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -575,7 +581,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-bottom-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_footnotes {
+#wdgduslfha .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -589,7 +595,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-right-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_footnote {
+#wdgduslfha .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -598,7 +604,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 5px;
 }
 
-#zghwqyanov .gt_sourcenotes {
+#wdgduslfha .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -612,7 +618,7 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   border-right-color: #D3D3D3;
 }
 
-#zghwqyanov .gt_sourcenote {
+#wdgduslfha .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -620,63 +626,63 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
   padding-right: 5px;
 }
 
-#zghwqyanov .gt_left {
+#wdgduslfha .gt_left {
   text-align: left;
 }
 
-#zghwqyanov .gt_center {
+#wdgduslfha .gt_center {
   text-align: center;
 }
 
-#zghwqyanov .gt_right {
+#wdgduslfha .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zghwqyanov .gt_font_normal {
+#wdgduslfha .gt_font_normal {
   font-weight: normal;
 }
 
-#zghwqyanov .gt_font_bold {
+#wdgduslfha .gt_font_bold {
   font-weight: bold;
 }
 
-#zghwqyanov .gt_font_italic {
+#wdgduslfha .gt_font_italic {
   font-style: italic;
 }
 
-#zghwqyanov .gt_super {
+#wdgduslfha .gt_super {
   font-size: 65%;
 }
 
-#zghwqyanov .gt_footnote_marks {
+#wdgduslfha .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zghwqyanov .gt_asterisk {
+#wdgduslfha .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zghwqyanov .gt_indent_1 {
+#wdgduslfha .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zghwqyanov .gt_indent_2 {
+#wdgduslfha .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zghwqyanov .gt_indent_3 {
+#wdgduslfha .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zghwqyanov .gt_indent_4 {
+#wdgduslfha .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zghwqyanov .gt_indent_5 {
+#wdgduslfha .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -684,135 +690,139 @@ dbl (31): PAge, R/G, W, L, ERA, RA9, G, GS, GF, CG, SHO, SV, IP, H, R, ER, H...
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="5" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">Nebraska pitching was consistent all season where it mattered most</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">Since 2014, Ohio State has recruited at the top-5 level every year</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left; color: #000000;">The Husker's gave up less hits and free passes than all of the regional hosts, and had a low ERA.</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left; color: #000000;">Penn State is more comparable to Michigan with an equal number of five and four stars, and average recruiting per recruit</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="Team" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Team</th>
-<th id="Conference" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Conference</th>
-<th id="Earned Runs Allowed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Earned Runs Allowed</th>
-<th id="Hits Allowed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Hits Allowed</th>
-<th id="Walks + HBP" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Walks + HBP</th>
+<th id="5 stars" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">5 stars</th>
+<th id="4 stars" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">4 stars</th>
+<th id="3 stars" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">3 stars</th>
+<th id="Avg Rating" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Avg Rating</th>
+<th id="Avg Ranking" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 1px; border-top-style: solid; border-top-color: #000000; font-size: 13.5; font-weight: bold" scope="col">Avg Ranking</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Texas</td>
-<td class="gt_row gt_left" headers="Conference">Big 12</td>
-<td class="gt_row gt_right" headers="ERA">2.93</td>
-<td class="gt_row gt_right" headers="H">467</td>
-<td class="gt_row gt_right" headers="BBHBP">257</td>
+<td class="gt_row gt_left" headers="Team" style="background-color: #BB0000; color: #FFFFFF">Ohio State</td>
+<td class="gt_row gt_right" headers="Tot5stars" style="background-color: #BB0000; color: #FFFFFF">31</td>
+<td class="gt_row gt_right" headers="Tot4stars" style="background-color: #BB0000; color: #FFFFFF">169</td>
+<td class="gt_row gt_right" headers="Tot3stars" style="background-color: #BB0000; color: #FFFFFF">48</td>
+<td class="gt_row gt_right" headers="TotAvgRating" style="background-color: #BB0000; color: #FFFFFF">92.79545</td>
+<td class="gt_row gt_right" headers="TotAvgRanking" style="background-color: #BB0000; color: #FFFFFF">4.727273</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">Tennessee</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">3.51</td>
-<td class="gt_row gt_right gt_striped" headers="H">545</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">215</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Penn State</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">8</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">133</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">111</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">89.73909</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">14.727273</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Oregon</td>
-<td class="gt_row gt_left" headers="Conference">Pac 12</td>
-<td class="gt_row gt_right" headers="ERA">3.71</td>
-<td class="gt_row gt_right" headers="H">465</td>
-<td class="gt_row gt_right" headers="BBHBP">229</td>
+<td class="gt_row gt_left" headers="Team" style="background-color: #00274C; color: #FFFFFF">Michigan</td>
+<td class="gt_row gt_right" headers="Tot5stars" style="background-color: #00274C; color: #FFFFFF">8</td>
+<td class="gt_row gt_right" headers="Tot4stars" style="background-color: #00274C; color: #FFFFFF">133</td>
+<td class="gt_row gt_right" headers="Tot3stars" style="background-color: #00274C; color: #FFFFFF">110</td>
+<td class="gt_row gt_right" headers="TotAvgRating" style="background-color: #00274C; color: #FFFFFF">89.93455</td>
+<td class="gt_row gt_right" headers="TotAvgRanking" style="background-color: #00274C; color: #FFFFFF">15.000000</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">Arkansas</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">3.77</td>
-<td class="gt_row gt_right gt_striped" headers="H">467</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">267</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Nebraska</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">1</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">62</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">200</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">87.39000</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">25.090909</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">South Carolina</td>
-<td class="gt_row gt_left" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right" headers="ERA">3.80</td>
-<td class="gt_row gt_right" headers="H">422</td>
-<td class="gt_row gt_right" headers="BBHBP">258</td>
+<td class="gt_row gt_left" headers="Team">Michigan State</td>
+<td class="gt_row gt_right" headers="Tot5stars">1</td>
+<td class="gt_row gt_right" headers="Tot4stars">48</td>
+<td class="gt_row gt_right" headers="Tot3stars">183</td>
+<td class="gt_row gt_right" headers="TotAvgRating">87.17455</td>
+<td class="gt_row gt_right" headers="TotAvgRanking">30.909091</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team" style="color: #FFFFFF; font-weight: bold; background-color: #FF0000">Nebraska</td>
-<td class="gt_row gt_left gt_striped" headers="Conference" style="color: #FFFFFF; font-weight: bold; background-color: #FF0000">Big Ten</td>
-<td class="gt_row gt_right gt_striped" headers="ERA" style="color: #FFFFFF; font-weight: bold; background-color: #FF0000">3.81</td>
-<td class="gt_row gt_right gt_striped" headers="H" style="color: #FFFFFF; font-weight: bold; background-color: #FF0000">372</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP" style="color: #FFFFFF; font-weight: bold; background-color: #FF0000">214</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Maryland</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">3</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">40</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">199</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">86.10545</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">34.545455</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Notre Dame</td>
-<td class="gt_row gt_left" headers="Conference">Atlantic Coast</td>
-<td class="gt_row gt_right" headers="ERA">3.95</td>
-<td class="gt_row gt_right" headers="H">383</td>
-<td class="gt_row gt_right" headers="BBHBP">227</td>
+<td class="gt_row gt_left" headers="Team">Wisconsin</td>
+<td class="gt_row gt_right" headers="Tot5stars">2</td>
+<td class="gt_row gt_right" headers="Tot4stars">43</td>
+<td class="gt_row gt_right" headers="Tot3stars">171</td>
+<td class="gt_row gt_right" headers="TotAvgRating">87.04273</td>
+<td class="gt_row gt_right" headers="TotAvgRanking">35.272727</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">East Carolina</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">American Athletic</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">4.01</td>
-<td class="gt_row gt_right gt_striped" headers="H">480</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">279</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Iowa</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">1</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">27</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">200</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">85.85364</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">40.636364</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Mississippi State</td>
-<td class="gt_row gt_left" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right" headers="ERA">4.04</td>
-<td class="gt_row gt_right" headers="H">494</td>
-<td class="gt_row gt_right" headers="BBHBP">315</td>
+<td class="gt_row gt_left" headers="Team">Minnesota</td>
+<td class="gt_row gt_right" headers="Tot5stars">0</td>
+<td class="gt_row gt_right" headers="Tot4stars">20</td>
+<td class="gt_row gt_right" headers="Tot3stars">214</td>
+<td class="gt_row gt_right" headers="TotAvgRating">85.45273</td>
+<td class="gt_row gt_right" headers="TotAvgRanking">46.909091</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">TCU</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Big 12</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">4.13</td>
-<td class="gt_row gt_right gt_striped" headers="H">497</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">261</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Rutgers</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">0</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">18</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">209</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">84.58545</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">51.454545</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Texas Tech</td>
-<td class="gt_row gt_left" headers="Conference">Big 12</td>
-<td class="gt_row gt_right" headers="ERA">4.30</td>
-<td class="gt_row gt_right" headers="H">439</td>
-<td class="gt_row gt_right" headers="BBHBP">279</td>
+<td class="gt_row gt_left" headers="Team">Indiana</td>
+<td class="gt_row gt_right" headers="Tot5stars">0</td>
+<td class="gt_row gt_right" headers="Tot4stars">13</td>
+<td class="gt_row gt_right" headers="Tot3stars">209</td>
+<td class="gt_row gt_right" headers="TotAvgRating">85.12636</td>
+<td class="gt_row gt_right" headers="TotAvgRanking">51.636364</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">Florida</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">4.37</td>
-<td class="gt_row gt_right gt_striped" headers="H">510</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">237</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Northwestern</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">0</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">13</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">179</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">85.75909</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">53.181818</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Team">Arizona</td>
-<td class="gt_row gt_left" headers="Conference">Pac 12</td>
-<td class="gt_row gt_right" headers="ERA">4.60</td>
-<td class="gt_row gt_right" headers="H">575</td>
-<td class="gt_row gt_right" headers="BBHBP">299</td>
+<td class="gt_row gt_left" headers="Team">Purdue</td>
+<td class="gt_row gt_right" headers="Tot5stars">0</td>
+<td class="gt_row gt_right" headers="Tot4stars">20</td>
+<td class="gt_row gt_right" headers="Tot3stars">200</td>
+<td class="gt_row gt_right" headers="TotAvgRating">84.64818</td>
+<td class="gt_row gt_right" headers="TotAvgRanking">55.545455</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">Stanford</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Pac 12</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">4.64</td>
-<td class="gt_row gt_right gt_striped" headers="H">466</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">285</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Team">Ole Miss</td>
-<td class="gt_row gt_left" headers="Conference">Southeastern</td>
-<td class="gt_row gt_right" headers="ERA">4.79</td>
-<td class="gt_row gt_right" headers="H">576</td>
-<td class="gt_row gt_right" headers="BBHBP">265</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left gt_striped" headers="Team">Louisiana Tech</td>
-<td class="gt_row gt_left gt_striped" headers="Conference">Conference USA</td>
-<td class="gt_row gt_right gt_striped" headers="ERA">5.01</td>
-<td class="gt_row gt_right gt_striped" headers="H">567</td>
-<td class="gt_row gt_right gt_striped" headers="BBHBP">256</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Illinois</td>
+<td class="gt_row gt_right gt_striped" headers="Tot5stars">0</td>
+<td class="gt_row gt_right gt_striped" headers="Tot4stars">12</td>
+<td class="gt_row gt_right gt_striped" headers="Tot3stars">207</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRating">84.37182</td>
+<td class="gt_row gt_right gt_striped" headers="TotAvgRanking">57.909091</td>
 </tr>
 </tbody><tfoot class="gt_sourcenotes">
 <tr class="odd">
-<td colspan="5" class="gt_sourcenote">Source: Sports Reference | By: Jackson Young</td>
+<td colspan="6" class="gt_sourcenote">By: Jackson Young</td>
+</tr>
+<tr class="even">
+<td colspan="6" class="gt_sourcenote">Source: <a href="https://247sports.com/Season/2024-Football/CompositeTeamRankings/">247Sports</a></td>
 </tr>
 </tfoot>
 
